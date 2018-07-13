@@ -7,7 +7,7 @@ Quick Start
 ```
 $ git clone git@github.com:eliwjones/paxos.git
 $ cd paxos/one
-$ go run message_hasher.go
+$ PORT=9999 go run message_hasher.go
 ```
 
 3. Try to get something that is not there:

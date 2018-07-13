@@ -6,7 +6,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
+	"os"
 	"strings"
 )
 
@@ -23,7 +25,12 @@ func main() {
 	http.HandleFunc("/messages/", getHandler)
 	http.HandleFunc("/messages", postHandler)
 
-	http.ListenAndServe("127.0.0.1:9999", nil)
+	port := os.Getenv("PORT")
+	if port == "" {
+		log.Fatal(fmt.Errorf("$PORT is not set"))
+	}
+
+	http.ListenAndServe(":"+port, nil)
 }
 
 func postHandler(w http.ResponseWriter, r *http.Request) {
