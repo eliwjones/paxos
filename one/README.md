@@ -10,11 +10,8 @@ $ cd paxos/one
 $ go run message_hasher.go
 ```
 
-3. Test it out:
+3. Try to get something that is not there:
 ```
-# In another terminal
-
-# Try to get something that is not there:
 $ curl -v http://127.0.0.1:9999/messages/2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae
 * Hostname was NOT found in DNS cache
 *   Trying 127.0.0.1...
@@ -32,14 +29,18 @@ $ curl -v http://127.0.0.1:9999/messages/2c26b46b68ffc68ff99b453c1d30413413422d7
 {
   "error":"Message not found."
 }
+```
 
-# Put it there:
+4. Put it there:
+```
 $ curl -X POST -H "Content-Type: application/json" -d '{"message": "foo"}' http://localhost:9999/messages
 {
   "digest":"2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae"
 }
+```
 
-# Get it:
+5. Get it:
+```
 $ curl http://127.0.0.1:9999/messages/2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae
 {
   "message":"foo"
