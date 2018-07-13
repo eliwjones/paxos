@@ -1,7 +1,5 @@
-from utilities import parse_prices, get_two_gifts, get_three_gifts
-
-
 import sys
+from utilities import parse_prices, get_two_gifts, get_three_gifts
 
 
 prices_filename = sys.argv[1]
