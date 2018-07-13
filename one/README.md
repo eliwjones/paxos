@@ -46,3 +46,22 @@ $ curl http://127.0.0.1:9999/messages/2c26b46b68ffc68ff99b453c1d30413413422d7064
   "message":"foo"
 }
 ```
+
+Test Deployed Code
+==================
+```
+$ curl https://message-hasher.herokuapp.com/messages/2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae
+{
+  "error": "Message not found."
+}
+
+$ curl -X POST -H "Content-Type: application/json" -d '{"message": "foo"}' https://message-hasher.herokuapp.com/messages
+{
+  "digest": "2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae"
+}
+
+$ curl https://message-hasher.herokuapp.com/messages/2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae
+{
+  "message": "foo"
+}
+```
