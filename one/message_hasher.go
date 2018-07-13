@@ -40,7 +40,8 @@ func postHandler(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method != "POST" {
 		w.WriteHeader(http.StatusBadRequest)
-		jsonEncoder.Encode(payload{Error: "I only accept POST requests with application/json data of the form: {'message': 'foo'}."})
+		errorMessage := "I only accept POST requests with application/json data of the form: {'message': 'foo'}."
+		jsonEncoder.Encode(payload{Error: errorMessage})
 		return
 	}
 
