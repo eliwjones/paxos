@@ -75,5 +75,5 @@ $ go test -v ./...
 === RUN   TestPostHandler
 --- PASS: TestPostHandler (0.00s)
 PASS
-ok  	_/home/mrz/eliwjones/paxos/one	(cached)
+ok  	_/home/mrz/eliwjones/paxos/one	0.007s
 ```
