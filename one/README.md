@@ -65,3 +65,15 @@ $ curl https://message-hasher.herokuapp.com/messages/2c26b46b68ffc68ff99b453c1d3
   "message": "foo"
 }
 ```
+
+Run Local Tests
+===============
+```
+$ go test -v ./...
+=== RUN   TestGetHandlerNotFound
+--- PASS: TestGetHandlerNotFound (0.00s)
+=== RUN   TestPostHandler
+--- PASS: TestPostHandler (0.00s)
+PASS
+ok  	_/home/mrz/eliwjones/paxos/one	(cached)
+```
