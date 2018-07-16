@@ -78,6 +78,17 @@ PASS
 ok  	_/home/mrz/eliwjones/paxos/one	0.007s
 ```
 
+Poor Man's Deploy Instructions
+==============================
+Naturally, do not really do this, but it serves its purpose:
+```
+$ git clone https://git.heroku.com/message-hasher.git heroku_deploy/message-hasher
+$ cp message_hasher.go heroku_deploy/message-hasher/main.go
+$ cd heroku_deploy/message-hasher
+$ git commit -a -m "new release."
+$ git push origin master
+```
+
 NOTES
 =====
 1. I've used Go for this problem since my Ubuntu Trusty install is several years old and only has Python 3.4 built-in.  This prevents me from easily using AIOHTTP 3.x (which requires Python 3.5+), and I find older versions of AIOHTTP to be fairly ugly, syntax-wise.  Also, Go is fairly ideal for something like this.
