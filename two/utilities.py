@@ -75,11 +75,8 @@ def get_three_gifts(prices, total_spend):
     k = 0
 
     while k < len(prices) - 2:
-        j = len(prices) - 1
-        i = k + 1
-
         two_gift_spend = total_spend - prices[k][1]
-        two_gifts = get_two_gifts(prices[i:], two_gift_spend)
+        two_gifts = get_two_gifts(prices[k + 1:], two_gift_spend)
 
         change = total_spend - (prices[k][1] + sum(gift[1] for gift in two_gifts))
 
