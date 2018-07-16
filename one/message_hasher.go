@@ -20,6 +20,7 @@ type payload struct {
 }
 
 // TODO: make sure to never restart the service or we lose all of our data.
+// TODO: use Redis or some lightning fast key-value store for persistence.
 var db = sync.Map{}
 
 func main() {
