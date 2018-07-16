@@ -43,6 +43,7 @@ func postHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		errorMessage := "I only accept POST requests with application/json data of the form: {'message': 'foo'}."
 		jsonEncoder.Encode(payload{Error: errorMessage})
+
 		return
 	}
 
@@ -51,6 +52,7 @@ func postHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		jsonEncoder.Encode(payload{Error: err.Error()})
+
 		return
 	}
 
@@ -72,6 +74,7 @@ func getHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" {
 		w.WriteHeader(http.StatusBadRequest)
 		jsonEncoder.Encode(payload{Error: "I only accept GET requests."})
+
 		return
 	}
 
