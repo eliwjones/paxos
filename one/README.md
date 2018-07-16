@@ -1,7 +1,7 @@
 Quick Start
 ===========
 
-1. If you don't have GO, go get it [http://golang.org/doc/install]
+1. If you don't have Go 1.9+ (required for sync.Map support), go get it [http://golang.org/doc/install]
 
 2. Clone repo and run the server:
 ```

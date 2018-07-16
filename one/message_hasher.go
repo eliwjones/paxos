@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"sync"
 )
 
 type payload struct {
@@ -19,7 +20,7 @@ type payload struct {
 }
 
 // TODO: make sure to never restart the service or we lose all of our data.
-var db = map[string]string{}
+var db = sync.Map{}
 
 func main() {
 	http.HandleFunc("/messages/", getHandler)
@@ -58,7 +59,7 @@ func postHandler(w http.ResponseWriter, r *http.Request) {
 
 	messageHash := fmt.Sprintf("%x", sha256.Sum256([]byte(p.Message)))
 
-	db[messageHash] = p.Message
+	db.Store(messageHash, p.Message)
 
 	jsonEncoder.Encode(payload{Digest: messageHash})
 }
@@ -77,8 +78,8 @@ func getHandler(w http.ResponseWriter, r *http.Request) {
 	splitURL := strings.Split(r.URL.Path, "/messages/")
 	messageHash := splitURL[1]
 
-	if message, found := db[messageHash]; found {
-		jsonEncoder.Encode(payload{Message: message})
+	if message, found := db.Load(messageHash); found {
+		jsonEncoder.Encode(payload{Message: message.(string)})
 	} else {
 		w.WriteHeader(http.StatusNotFound)
 		jsonEncoder.Encode(payload{Error: "Message not found."})
