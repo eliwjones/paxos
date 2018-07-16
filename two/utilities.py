@@ -66,11 +66,10 @@ def get_three_gifts(prices, total_spend):
     NOTES:  This is effectively the 3SUM algorithm.  Performance should be O(n^2) since we have
             to walk 2 items in from the bottom edge of the list and 1 item from the top.
 
-            Thus, for every item in the list, we are just performing the get_two_gifts algorithm.
-
-    TODO: This suggests one should maybe replace the inner while loop with get_two_gifts().
+            Thus, for every item in the list, we are just performing the get_two_gifts algorithm
+            against the remaining items with the available change.
     """
-    best_gift_pair = []
+    best_gifts = []
     best_change = total_spend
 
     k = 0
@@ -79,24 +78,15 @@ def get_three_gifts(prices, total_spend):
         j = len(prices) - 1
         i = k + 1
 
-        while i < j:
-            change = total_spend - (prices[i][1] + prices[j][1] + prices[k][1])
+        two_gift_spend = total_spend - prices[k][1]
+        two_gifts = get_two_gifts(prices[i:], two_gift_spend)
 
-            if 0 <= change <= best_change:
-                best_gift_pair = [prices[i], prices[j], prices[k]]
-                best_change = change
+        change = total_spend - (prices[k][1] + sum(gift[1] for gift in two_gifts))
 
-            if change == 0:
-                # great match, but lets keep looking for a more equitable gift pair.
-                j -= 1
-                i += 1
-            elif change < 0:
-                # high price item too high, must seek lower high price.
-                j -= 1
-            elif change > 0:
-                # more change to spend, must seek higher low price.
-                i += 1
+        if 0 <= change <= best_change:
+            best_gifts = two_gifts + [prices[k]]
+            best_change = change
 
         k += 1
 
-    return best_gift_pair
+    return best_gifts
