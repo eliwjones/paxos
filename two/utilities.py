@@ -1,4 +1,15 @@
 def parse_prices(prices_filename):
+    """
+    Turn a file named prices_filename that looks like:
+
+      candy, 100
+      shoes, 10000
+      bitcoin, 400000
+
+    Into a list like this:
+
+      [('candy', 100), ('shoes', 10000), ('bitcoin', 400000)]
+    """
     with open(prices_filename, 'r') as f:
         lines = f.read().splitlines()
 
@@ -9,6 +20,15 @@ def parse_prices(prices_filename):
 
 
 def get_two_gifts(prices, total_spend):
+    """
+    Select 2 gifts from a list of prices whose sum most closely matches a given amount.
+
+      prices -- A sorted list of (product_name, price) tuples. e.g. [('candy', 100), ('shoes', 10000)]
+      total_spend -- The maximum amount of money we wish to spend.
+
+    NOTES: Performance should be O(n) since we can walk inward from the edges of the list and touch
+           each item only once.
+    """
     best_gift_pair = []
     best_change = total_spend
 
@@ -37,6 +57,19 @@ def get_two_gifts(prices, total_spend):
 
 
 def get_three_gifts(prices, total_spend):
+    """
+    Select 3 gifts from a list of prices whose sum most closely matches a given amount.
+
+      prices -- A sorted list of (product_name, price) tuples.  e.g. [('candy', 100), ('shoes', 10000), ('bitcoin', 400000)]
+      total_spend -- The maximum amount of money we wish to spend.
+
+    NOTES:  This is effectively the 3SUM algorithm.  Performance should be O(n^2) since we have
+            to walk 2 items in from the bottom edge of the list and 1 item from the top.
+
+            Thus, for every item in the list, we are just performing the get_two_gifts algorithm.
+
+    TODO: This suggests one should maybe replace the inner while loop with get_two_gifts().
+    """
     best_gift_pair = []
     best_change = total_spend
 
