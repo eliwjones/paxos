@@ -69,13 +69,15 @@ $ curl https://message-hasher.herokuapp.com/messages/2c26b46b68ffc68ff99b453c1d3
 Run Local Tests
 ===============
 ```
-$ go test -v ./...
+$ go test -v ./... -count=1
+=== RUN   TestPostAndGetHandlersValidPayload
+--- PASS: TestPostAndGetHandlersValidPayload (0.00s)
+=== RUN   TestPostHandlerJsonUnmarshalError
+--- PASS: TestPostHandlerJsonUnmarshalError (0.00s)
 === RUN   TestGetHandlerNotFound
 --- PASS: TestGetHandlerNotFound (0.00s)
-=== RUN   TestPostHandler
---- PASS: TestPostHandler (0.00s)
 PASS
-ok  	_/home/mrz/eliwjones/paxos/one	0.007s
+ok  	_/home/mrz/eliwjones/paxos/one	0.006s
 ```
 
 Poor Man's Deploy Instructions
