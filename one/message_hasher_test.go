@@ -46,7 +46,7 @@ func TestPostAndGetHandlersValidPayload(t *testing.T) {
 	}
 }
 
-func TestPostHandlerError(t *testing.T) {
+func TestPostHandlerJsonUnmarshalError(t *testing.T) {
 	payload := []byte(`{"bad json`)
 	req := httptest.NewRequest("POST", "/messages", bytes.NewReader(payload))
 	w := httptest.NewRecorder()
