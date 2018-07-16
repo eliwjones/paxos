@@ -58,7 +58,14 @@ func postHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	p := payload{}
-	json.Unmarshal(b.Bytes(), &p)
+	err = json.Unmarshal(b.Bytes(), &p)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		errorMessage := fmt.Sprintf("Unmarshal Error: '%s' with Body: '%s'", err.Error(), b.String())
+		jsonEncoder.Encode(payload{Error: errorMessage})
+
+		return
+	}
 
 	messageHash := fmt.Sprintf("%x", sha256.Sum256([]byte(p.Message)))
 
